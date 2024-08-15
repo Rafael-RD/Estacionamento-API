@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Estacionamento_API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Estacionamento_API.Data
 {
@@ -14,6 +15,7 @@ namespace Estacionamento_API.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseSqlite($"Data Source={DbPath}");
 
-
+        public DbSet<PrecoModel> Precos { get; set; }
+        public DbSet<VeiculoModel> Veiculos { get; set; }
     }
 }
