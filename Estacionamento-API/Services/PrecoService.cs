@@ -18,7 +18,7 @@ namespace Estacionamento_API.Services
 
         public async Task<PrecoModel?> GetPrecoAtual()
         {
-            var Preco = await _dataContext.Precos.FirstOrDefaultAsync(p => p.PeriodoInicio <= DateTime.Now && p.PeriodoFinal >= DateTime.Now);
+            var Preco = await _dataContext.Precos.OrderBy(p => p.PeriodoInicio).FirstOrDefaultAsync(p => p.PeriodoInicio <= DateTime.Now);
 
             if (Preco == null)  return null;
 
