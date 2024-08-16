@@ -41,9 +41,12 @@ namespace Estacionamento_API.Services
             return Precos;
         }
 
-        public Task PostPreco(PrecoModel preco)
+        public async Task PostPreco(PrecoModel preco)
         {
-            throw new NotImplementedException();
+            ValidarPostPreco(preco);
+
+            _dataContext.Precos.Add(preco);
+            await _dataContext.SaveChangesAsync();
         }
 
         public Task PutPreco(int id, PrecoModel preco)
@@ -54,6 +57,18 @@ namespace Estacionamento_API.Services
         public Task DeletePreco(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public void ValidarPostPreco(PrecoModel preco)
+        {
+            if (preco.PrecoFixo >= 0) throw new Exception("Preco Fixo deve ser positivo");
+            if (preco.PrecoHora >= 0) throw new Exception("Preco Hora deve ser positivo");
+
+            if (preco.PeriodoInicio == null) throw new Exception("Inicio do periodo não pode ser nulo");
+            if (preco.PeriodoFinal == null) throw new Exception("Final do periodo não pode ser nulo");
+
+            if (preco.PeriodoFinal > DateTime.Now) throw new Exception("Final do periodo deve ser no futuro");
+            if (preco.PeriodoInicio < preco.PeriodoFinal) throw new Exception("Inicio do periodo deve vir antes do final");
         }
     }
 }
