@@ -34,9 +34,11 @@ namespace Estacionamento_API.Services
             return Preco;
         }
 
-        public Task<IEnumerable<PrecoModel>> GetPrecoTodos()
+        public async Task<IEnumerable<PrecoModel>> GetPrecoTodos()
         {
-            throw new NotImplementedException();
+            var Precos = await _dataContext.Precos.OrderBy(p => p.PeriodoInicio).ToListAsync();
+
+            return Precos;
         }
 
         public Task PostPreco(PrecoModel preco)
