@@ -16,9 +16,13 @@ namespace Estacionamento_API.Services
         }
 
 
-        public Task<PrecoModel?> GetPrecoAtual()
+        public async Task<PrecoModel?> GetPrecoAtual()
         {
-            throw new NotImplementedException();
+            var Preco = await _dataContext.Precos.FirstOrDefaultAsync(p => p.PeriodoInicio >= DateTime.Now && p.PeriodoFinal <= DateTime.Now);
+
+            if (Preco == null)  return null;
+
+            return Preco;
         }
 
         public Task<PrecoModel?> GetPrecoPorId(int id)
