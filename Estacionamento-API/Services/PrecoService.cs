@@ -25,9 +25,13 @@ namespace Estacionamento_API.Services
             return Preco;
         }
 
-        public Task<PrecoModel?> GetPrecoPorId(int id)
+        public async Task<PrecoModel?> GetPrecoPorId(int id)
         {
-            throw new NotImplementedException();
+            var Preco = await _dataContext.Precos.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (Preco == null) return null;
+
+            return Preco;
         }
 
         public Task<IEnumerable<PrecoModel>> GetPrecoTodos()
