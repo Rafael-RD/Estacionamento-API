@@ -1,10 +1,21 @@
-﻿using Estacionamento_API.Models;
+﻿using Estacionamento_API.Data;
+using Estacionamento_API.Models;
 using Estacionamento_API.Services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace Estacionamento_API.Services
 {
     public class PrecoService : IPrecoService
     {
+        private readonly DataContext _dataContext;
+
+        public PrecoService(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
+
+
         public Task<PrecoModel?> GetPrecoAtual()
         {
             throw new NotImplementedException();
