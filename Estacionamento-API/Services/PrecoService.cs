@@ -71,7 +71,7 @@ namespace Estacionamento_API.Services
             await _dataContext.SaveChangesAsync();
         }
 
-        public void ValidarPostPreco(PrecoModel preco)
+        public void ValidarPreco(PrecoModel preco)
         {
             if (preco.PrecoFixo < 0) throw new Exception("Preco Fixo deve ser positivo");
             if (preco.PrecoHora < 0) throw new Exception("Preco Hora deve ser positivo");
