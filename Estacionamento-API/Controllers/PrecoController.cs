@@ -33,5 +33,12 @@ namespace Estacionamento_API.Controllers
             await _precoService.PostPreco(requisicao);
             return Ok("Preço criado com sucesso");
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<string>> PutPreco(int id, PrecoModel requisicao)
+        {
+            await _precoService.PutPreco(id, requisicao);
+            return Ok("Preço alterado com sucesso");
+        }
     }
 }
