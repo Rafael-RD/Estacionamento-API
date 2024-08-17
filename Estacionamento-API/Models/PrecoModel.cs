@@ -12,6 +12,6 @@ namespace Estacionamento_API.Models
         public int PrecoHora { get; set; }
 
         public DateTime PeriodoInicio { get; set; }
-        public DateTime? PeriodoFinal { get; set; }
+        public DateTime PeriodoFinal { get; set; }
     }
 }
