@@ -1,3 +1,4 @@
+using Estacionamento_API.Data;
 using Estacionamento_API.Services;
 using Estacionamento_API.Services.Interfaces;
 
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPrecoService, PrecoService>();
+builder.Services.AddScoped<DataContext>();
 
 var app = builder.Build();
 
