@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Estacionamento_API.Models;
+using Estacionamento_API.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Estacionamento_API.Controllers
 {
@@ -17,6 +19,12 @@ namespace Estacionamento_API.Controllers
         public async Task<ActionResult<PrecoModel>> GetPrecoTodos()
         {
             return Ok(await _precoService.GetPrecoTodos());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PrecoModel?>> GetPrecoPorId(int id)
+        {
+            return Ok(await _precoService.GetPrecoPorId(id));
         }
     }
 }
