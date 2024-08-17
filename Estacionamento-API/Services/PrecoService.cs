@@ -63,9 +63,12 @@ namespace Estacionamento_API.Services
             await _dataContext.SaveChangesAsync();
         }
 
-        public Task DeletePreco(int id)
+        public async Task DeletePreco(int id)
         {
-            throw new NotImplementedException();
+            var preco = await _dataContext.Precos.FirstOrDefaultAsync(p => p.Id == id) ?? throw new Exception("Preço id não encontrado");
+
+            _dataContext.Precos.Remove(preco);
+            await _dataContext.SaveChangesAsync();
         }
 
         public void ValidarPostPreco(PrecoModel preco)
