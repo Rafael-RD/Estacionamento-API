@@ -24,7 +24,11 @@ namespace Estacionamento_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PrecoModel?>> GetPrecoPorId(int id)
         {
-            return Ok(await _precoService.GetPrecoPorId(id));
+            var preco = await _precoService.GetPrecoPorId(id);
+            
+            if (preco == null) return NotFound("Preco não encontrado");
+            
+            return Ok(preco);
         }
 
         [HttpPost]
