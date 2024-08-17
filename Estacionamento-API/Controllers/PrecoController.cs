@@ -26,5 +26,12 @@ namespace Estacionamento_API.Controllers
         {
             return Ok(await _precoService.GetPrecoPorId(id));
         }
+
+        [HttpPost]
+        public async Task<ActionResult<string>> PostPreco(PrecoModel requisicao)
+        {
+            await _precoService.PostPreco(requisicao);
+            return Ok("Preço criado com sucesso");
+        }
     }
 }
