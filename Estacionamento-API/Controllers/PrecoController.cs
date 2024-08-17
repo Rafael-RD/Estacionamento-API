@@ -6,6 +6,12 @@ namespace Estacionamento_API.Controllers
     [ApiController]
     public class PrecoController : ControllerBase
     {
+        private readonly IPrecoService _precoService;
+
+        public PrecoController(IPrecoService precoService)
+        {
+            _precoService = precoService;
+        }
 
     }
 }
