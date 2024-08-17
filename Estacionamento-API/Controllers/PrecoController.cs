@@ -15,7 +15,7 @@ namespace Estacionamento_API.Controllers
             _precoService = precoService;
         }
 
-        [HttpGet]
+        [HttpGet("Todos")]
         public async Task<ActionResult<PrecoModel>> GetPrecoTodos()
         {
             return Ok(await _precoService.GetPrecoTodos());
