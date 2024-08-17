@@ -1,6 +1,11 @@
 name: build
 
-on: [ pull_request, push]
+on:
+  pull_request:
+
+  push:
+    branches: 
+      - 'master'
 
 env:
   DOTNET_VERSION: '8.0' # The .NET SDK version to use
