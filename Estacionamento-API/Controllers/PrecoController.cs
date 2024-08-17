@@ -15,6 +15,16 @@ namespace Estacionamento_API.Controllers
             _precoService = precoService;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<PrecoModel?>> GetPrecoAtual()
+        {
+            var preco = await _precoService.GetPrecoAtual();
+
+            if (preco == null) return NotFound("Preço atual não definido");
+
+            return Ok(preco);
+        }
+
         [HttpGet("Todos")]
         public async Task<ActionResult<PrecoModel>> GetPrecoTodos()
         {
