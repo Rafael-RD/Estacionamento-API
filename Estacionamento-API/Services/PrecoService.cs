@@ -43,7 +43,7 @@ namespace Estacionamento_API.Services
 
         public async Task PostPreco(PrecoModel preco)
         {
-            ValidarPostPreco(preco);
+            ValidarPreco(preco);
 
             _dataContext.Precos.Add(preco);
             await _dataContext.SaveChangesAsync();
