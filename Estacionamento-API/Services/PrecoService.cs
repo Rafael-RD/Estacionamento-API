@@ -55,6 +55,8 @@ namespace Estacionamento_API.Services
 
             var precoAntigo = await _dataContext.Precos.FirstOrDefaultAsync(p => p.Id == id) ?? throw new Exception("Preço id não encontrado");
 
+            ValidarPreco(preco);
+
             precoAntigo.PrecoFixo = preco.PrecoFixo;
             precoAntigo.PrecoHora = preco.PrecoHora;
             precoAntigo.PeriodoInicio = preco.PeriodoInicio;
