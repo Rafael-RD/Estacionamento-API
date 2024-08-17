@@ -73,8 +73,8 @@ namespace Estacionamento_API.Services
 
         public void ValidarPostPreco(PrecoModel preco)
         {
-            if (preco.PrecoFixo >= 0) throw new Exception("Preco Fixo deve ser positivo");
-            if (preco.PrecoHora >= 0) throw new Exception("Preco Hora deve ser positivo");
+            if (preco.PrecoFixo < 0) throw new Exception("Preco Fixo deve ser positivo");
+            if (preco.PrecoHora < 0) throw new Exception("Preco Hora deve ser positivo");
 
             if (preco.PeriodoInicio == null) throw new Exception("Inicio do periodo não pode ser nulo");
             if (preco.PeriodoFinal == null) throw new Exception("Final do periodo não pode ser nulo");
