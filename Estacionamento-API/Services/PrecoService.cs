@@ -49,9 +49,18 @@ namespace Estacionamento_API.Services
             await _dataContext.SaveChangesAsync();
         }
 
-        public Task PutPreco(int id, PrecoModel preco)
+        public async Task PutPreco(int id, PrecoModel preco)
         {
-            throw new NotImplementedException();
+            if (preco.Id != id) throw new Exception("Id requisitado diferente do preço id");
+
+            var precoAntigo = await _dataContext.Precos.FirstOrDefaultAsync(p => p.Id == id) ?? throw new Exception("Preço id não encontrado");
+
+            precoAntigo.PrecoFixo = preco.PrecoFixo;
+            precoAntigo.PrecoHora = preco.PrecoHora;
+            precoAntigo.PeriodoInicio = preco.PeriodoInicio;
+            precoAntigo.PeriodoFinal = preco.PeriodoFinal;
+
+            await _dataContext.SaveChangesAsync();
         }
 
         public Task DeletePreco(int id)
