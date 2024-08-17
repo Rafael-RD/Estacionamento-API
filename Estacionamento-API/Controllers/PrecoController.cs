@@ -40,5 +40,12 @@ namespace Estacionamento_API.Controllers
             await _precoService.PutPreco(id, requisicao);
             return Ok("Preço alterado com sucesso");
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<string>> DeletePreco(int id)
+        {
+            await _precoService.DeletePreco(id);
+            return Ok("Preço deletado com sucesso");
+        }
     }
 }
