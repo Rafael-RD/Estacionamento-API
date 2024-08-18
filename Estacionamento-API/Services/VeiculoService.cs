@@ -2,6 +2,7 @@
 using Estacionamento_API.Models;
 using Estacionamento_API.Models.DTOs;
 using Estacionamento_API.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Estacionamento_API.Services
 {
@@ -14,9 +15,13 @@ namespace Estacionamento_API.Services
             _dataContext = dataContext;
         }
 
-        public Task<VeiculoModel?> GetVeiculoPorId(int id)
+        public async Task<VeiculoModel?> GetVeiculoPorId(int id)
         {
-            throw new NotImplementedException();
+            var veiculo = await _dataContext.Veiculos.FirstOrDefaultAsync(v => v.Id == id);
+
+            if (veiculo == null) return null;
+
+            return veiculo;
         }
 
         public Task<VeiculoModel?> GetVeiculoPorPlaca(string placa)
