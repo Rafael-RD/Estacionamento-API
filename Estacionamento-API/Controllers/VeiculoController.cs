@@ -51,9 +51,10 @@ namespace Estacionamento_API.Controllers
         }
 
         [HttpPost("entrada")]
-        public Task PostVeiculoEntrada(VeiculoEntradaDTO veiculoEntradaDTO)
+        public async Task<ActionResult<string>> PostVeiculoEntrada(VeiculoEntradaDTO veiculoEntradaDTO)
         {
-            throw new NotImplementedException();
+            await _veiculoService.PostVeiculoEntrada(veiculoEntradaDTO);
+            return Ok("Veiculo adicionado");
         }
 
         [HttpPost("saida")]

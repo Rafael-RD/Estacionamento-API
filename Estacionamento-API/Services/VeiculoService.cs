@@ -48,9 +48,18 @@ namespace Estacionamento_API.Services
             return veiculos;
         }
 
-        public Task PostVeiculoEntrada(VeiculoEntradaDTO veiculoEntradaDTO)
+        public async Task PostVeiculoEntrada(VeiculoEntradaDTO veiculoEntradaDTO)
         {
-            throw new NotImplementedException();
+            VerificarPlaca(veiculoEntradaDTO.Placa);
+
+            VeiculoModel veiculo = new VeiculoModel()
+            {
+                Placa = veiculoEntradaDTO.Placa,
+                DataEntrada = veiculoEntradaDTO.DataEntrada
+            };
+
+            _dataContext.Veiculos.Add(veiculo);
+            await _dataContext.SaveChangesAsync();
         }
 
         public Task PostVeiculoSaida(VeiculoSaidaDTO veiculoSaidaDTO)
