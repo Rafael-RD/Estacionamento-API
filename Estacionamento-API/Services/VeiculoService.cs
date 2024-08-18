@@ -3,6 +3,7 @@ using Estacionamento_API.Models;
 using Estacionamento_API.Models.DTOs;
 using Estacionamento_API.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace Estacionamento_API.Services
 {
@@ -65,6 +66,15 @@ namespace Estacionamento_API.Services
         public Task DeleteVeiculo(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public void VerificarPlaca(string placa)
+        {
+            bool placaCorreta = Regex.IsMatch(placa, "^[a-zA-Z]{3}[0-9]([0-9]|[a-zA-Z])[0-9]{2}$");
+
+            if (placaCorreta == false) throw new Exception("Placa invalida");
+
+            return;
         }
     }
 }
