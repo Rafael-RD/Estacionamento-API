@@ -45,9 +45,9 @@ namespace Estacionamento_API.Controllers
         }
 
         [HttpGet("todos")]
-        public Task<IEnumerable<VeiculoModel>> GetVeiculoTodos()
+        public async Task<ActionResult<IEnumerable<VeiculoModel>>> GetVeiculoTodos()
         {
-            throw new NotImplementedException();
+            return Ok(await _veiculoService.GetVeiculoTodos());
         }
 
         [HttpPost("entrada")]
