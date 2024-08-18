@@ -10,10 +10,12 @@ namespace Estacionamento_API.Services
     public class VeiculoService : IVeiculoService
     {
         private readonly DataContext _dataContext;
+        private readonly IPrecoService _precoService;
 
-        public VeiculoService(DataContext dataContext)
+        public VeiculoService(DataContext dataContext, IPrecoService precoService)
         {
             _dataContext = dataContext;
+            _precoService = precoService;
         }
 
         public async Task<VeiculoModel?> GetVeiculoPorId(int id)
