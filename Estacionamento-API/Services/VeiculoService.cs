@@ -33,9 +33,11 @@ namespace Estacionamento_API.Services
             return veiculo;
         }
 
-        public Task<IEnumerable<VeiculoModel>> GetVeiculoEstacionados()
+        public async Task<IEnumerable<VeiculoModel>> GetVeiculoEstacionados()
         {
-            throw new NotImplementedException();
+            var veiculos = await _dataContext.Veiculos.Where(v => v.DataSaida == null).ToListAsync();
+
+            return veiculos;
         }
 
         public Task<IEnumerable<VeiculoModel>> GetVeiculoTodos()
