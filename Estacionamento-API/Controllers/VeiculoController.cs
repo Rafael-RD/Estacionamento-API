@@ -29,9 +29,13 @@ namespace Estacionamento_API.Controllers
         }
 
         [HttpGet("placa/{placa}")]
-        public Task<VeiculoModel?> GetVeiculoPorPlaca(string placa)
+        public async Task<ActionResult<VeiculoModel?>> GetVeiculoPorPlaca(string placa)
         {
-            throw new NotImplementedException();
+            var veiculo = await _veiculoService.GetVeiculoPorPlaca(placa);
+
+            if (veiculo == null) return NotFound("Veiculo não encontrado");
+
+            return Ok(veiculo);
         }
 
         [HttpGet("estacionados")]

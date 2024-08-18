@@ -24,9 +24,13 @@ namespace Estacionamento_API.Services
             return veiculo;
         }
 
-        public Task<VeiculoModel?> GetVeiculoPorPlaca(string placa)
+        public async Task<VeiculoModel?> GetVeiculoPorPlaca(string placa)
         {
-            throw new NotImplementedException();
+            var veiculo = await _dataContext.Veiculos.LastOrDefaultAsync(v => v.Placa == placa);
+
+            if(veiculo == null) return null;
+
+            return veiculo;
         }
 
         public Task<IEnumerable<VeiculoModel>> GetVeiculoEstacionados()
