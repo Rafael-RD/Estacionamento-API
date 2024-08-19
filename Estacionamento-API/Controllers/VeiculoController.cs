@@ -71,9 +71,10 @@ namespace Estacionamento_API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public Task DeleteVeiculo(int id)
+        public async Task<ActionResult<string>> DeleteVeiculo(int id)
         {
-            throw new NotImplementedException();
+            await _veiculoService.DeleteVeiculo(id);
+            return Ok("Veiculo deletado");
         }
     }
 }

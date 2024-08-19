@@ -116,9 +116,12 @@ namespace Estacionamento_API.Services
             await _dataContext.SaveChangesAsync();
         }
 
-        public Task DeleteVeiculo(int id)
+        public async Task DeleteVeiculo(int id)
         {
-            throw new NotImplementedException();
+            var veiculo = await _dataContext.Veiculos.FirstOrDefaultAsync(v => v.Id == id) ?? throw new Exception("Veiculo id não encontrado");
+
+            _dataContext.Veiculos.Remove(veiculo);
+            await _dataContext.SaveChangesAsync();
         }
 
         public void VerificarPlaca(string placa)
