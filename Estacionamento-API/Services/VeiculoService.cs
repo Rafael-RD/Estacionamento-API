@@ -79,11 +79,11 @@ namespace Estacionamento_API.Services
 
             TimeSpan tempoEstacionado = veiculoSaidaDTO.DataSaida.Subtract(veiculo.DataEntrada);
 
-            int minutosComTolerancia = tempoEstacionado.TotalMinutes > 10 ? 
-                (int) tempoEstacionado.TotalMinutes - 10 :
-                (int) tempoEstacionado.TotalMinutes;
+            TimeSpan tempoEstacionadoComTolerancia = tempoEstacionado.TotalMinutes > 10 ?
+                tempoEstacionado.Subtract(new TimeSpan(0, 10, 0)) : 
+                tempoEstacionado;
 
-            int aPagarHora = minutosComTolerancia * preco.PrecoHora;
+            int aPagarHora = tempoEstacionadoComTolerancia.Hours * preco.PrecoHora;
 
             int aPagarTotal = aPagarHora + preco.PrecoFixo; 
 
