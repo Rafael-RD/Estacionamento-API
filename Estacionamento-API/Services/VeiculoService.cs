@@ -83,7 +83,7 @@ namespace Estacionamento_API.Services
                 tempoEstacionado.Subtract(new TimeSpan(0, 10, 0)) : 
                 tempoEstacionado;
 
-            int aPagarHora = tempoEstacionadoComTolerancia.Hours * preco.PrecoHora;
+            int aPagarHora =((int) Math.Floor(tempoEstacionadoComTolerancia.TotalHours)) * preco.PrecoHora;
 
             int aPagarTotal = aPagarHora + preco.PrecoFixo; 
 
