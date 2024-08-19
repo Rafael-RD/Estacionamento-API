@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPrecoService, PrecoService>();
+builder.Services.AddScoped<IVeiculoService, VeiculoService>();
 builder.Services.AddScoped<DataContext>();
 
 var app = builder.Build();
