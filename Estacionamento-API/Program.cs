@@ -15,6 +15,10 @@ builder.Services.AddScoped<IPrecoService, PrecoService>();
 builder.Services.AddScoped<IVeiculoService, VeiculoService>();
 builder.Services.AddScoped<DataContext>();
 
+builder.Services.AddCors(options =>
+    options.AddDefaultPolicy(policy =>
+        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,5 +33,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors();
 
 app.Run();
