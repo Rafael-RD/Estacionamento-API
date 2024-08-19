@@ -11,7 +11,7 @@ namespace Estacionamento_API.Services.Interfaces
         Task<IEnumerable<VeiculoModel>> GetVeiculoEstacionados();
 
         Task PostVeiculoEntrada(VeiculoEntradaDTO veiculoEntradaDTO);
-        Task PostVeiculoSaida(VeiculoSaidaDTO veiculoSaidaDTO);
+        Task<VeiculoSaidaPrecoDTO> PostVeiculoSaida(VeiculoSaidaDTO veiculoSaidaDTO);
 
         Task PutVeiculo(int id, VeiculoModel veiculo);
 

@@ -58,9 +58,9 @@ namespace Estacionamento_API.Controllers
         }
 
         [HttpPost("saida")]
-        public Task PostVeiculoSaida(VeiculoSaidaDTO veiculoSaidaDTO)
+        public async Task<ActionResult<VeiculoSaidaPrecoDTO>> PostVeiculoSaida(VeiculoSaidaDTO veiculoSaidaDTO)
         {
-            throw new NotImplementedException();
+            return Ok(await _veiculoService.PostVeiculoSaida(veiculoSaidaDTO));
         }
 
         [HttpPut("{id}")]

@@ -64,9 +64,43 @@ namespace Estacionamento_API.Services
             await _dataContext.SaveChangesAsync();
         }
 
-        public Task PostVeiculoSaida(VeiculoSaidaDTO veiculoSaidaDTO)
+        public async Task<VeiculoSaidaPrecoDTO> PostVeiculoSaida(VeiculoSaidaDTO veiculoSaidaDTO)
         {
-            throw new NotImplementedException();
+            VerificarPlaca(veiculoSaidaDTO.Placa);
+
+            var veiculo = await GetVeiculoPorPlaca(veiculoSaidaDTO.Placa);
+
+            if (veiculo == null) throw new Exception("Veiculo não encontrado");
+
+
+            var preco = await _precoService.GetPrecoAtual();
+
+            if (preco == null) throw new Exception("Preço não definido");
+
+            TimeSpan tempoEstacionado = veiculoSaidaDTO.DataSaida.Subtract(veiculo.DataEntrada);
+
+            int minutosComTolerancia = tempoEstacionado.TotalMinutes > 10 ? 
+                (int) tempoEstacionado.TotalMinutes - 10 :
+                (int) tempoEstacionado.TotalMinutes;
+
+            int aPagarHora = minutosComTolerancia * preco.PrecoHora;
+
+            int aPagarTotal = aPagarHora + preco.PrecoFixo; 
+
+            VeiculoSaidaPrecoDTO veiculoSaidaPrecoDTO = new VeiculoSaidaPrecoDTO()
+            {
+                Placa = veiculo.Placa,
+                DataEntrada = veiculo.DataEntrada,
+                PrecoFixo = preco.PrecoFixo,
+                PrecoHora = preco.PrecoHora,
+                APagar = aPagarTotal
+            };
+
+            veiculo.DataSaida = veiculoSaidaDTO.DataSaida;
+
+            await _dataContext.SaveChangesAsync();
+
+            return veiculoSaidaPrecoDTO;
         }
 
         public Task PutVeiculo(int id, VeiculoModel veiculo)
