@@ -16,11 +16,11 @@ namespace Estacionamento_API.Services
         }
 
 
-        public async Task<PrecoModel?> GetPrecoAtual()
+        public async Task<PrecoModel> GetPrecoAtual()
         {
-            var Preco = await _dataContext.Precos.OrderBy(p => p.PeriodoInicio).FirstOrDefaultAsync(p => p.PeriodoInicio <= DateTime.Now);
+            var Preco = await _dataContext.Precos.Where(p => p.PeriodoInicio <= DateTime.Now && p.PeriodoFinal > DateTime.Now).FirstOrDefaultAsync();
 
-            if (Preco == null)  return null;
+            if (Preco == null)  throw new Exception("Nenhum preço para a data atual");
 
             return Preco;
         }
