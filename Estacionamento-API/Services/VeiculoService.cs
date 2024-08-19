@@ -103,9 +103,17 @@ namespace Estacionamento_API.Services
             return veiculoSaidaPrecoDTO;
         }
 
-        public Task PutVeiculo(int id, VeiculoModel veiculo)
+        public async Task PutVeiculo(int id, VeiculoModel veiculo)
         {
-            throw new NotImplementedException();
+            if (veiculo.Id != id) throw new Exception("Id requisitado diferente do veiculo id");
+
+            var veiculoAntigo = await _dataContext.Veiculos.FirstOrDefaultAsync(v => v.Id == id) ?? throw new Exception("Veiculo id não encontrado");
+
+            veiculoAntigo.Placa = veiculo.Placa;
+            veiculoAntigo.DataEntrada = veiculo.DataEntrada;
+            veiculoAntigo.DataSaida = veiculo.DataSaida;
+
+            await _dataContext.SaveChangesAsync();
         }
 
         public Task DeleteVeiculo(int id)

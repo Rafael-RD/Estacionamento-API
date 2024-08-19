@@ -64,9 +64,10 @@ namespace Estacionamento_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public Task PutVeiculo(int id, VeiculoModel veiculo)
+        public async Task<ActionResult<string>> PutVeiculo(int id, VeiculoModel veiculo)
         {
-            throw new NotImplementedException();
+            await _veiculoService.PutVeiculo(id, veiculo);
+            return Ok("Veiculo atualizado");
         }
 
         [HttpDelete("{id}")]
