@@ -29,7 +29,7 @@ namespace Estacionamento_API.Services
 
         public async Task<VeiculoModel?> GetVeiculoPorPlaca(string placa)
         {
-            var veiculo = await _dataContext.Veiculos.LastOrDefaultAsync(v => v.Placa == placa);
+            var veiculo = await _dataContext.Veiculos.OrderBy(v => v.Id).LastOrDefaultAsync(v => v.Placa == placa);
 
             if(veiculo == null) return null;
 
