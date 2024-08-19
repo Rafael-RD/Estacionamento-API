@@ -4,7 +4,7 @@ namespace Estacionamento_API.Services.Interfaces
 {
     public interface IPrecoService
     {
-        Task<PrecoModel?> GetPrecoAtual();
+        Task<PrecoModel> GetPrecoAtual();
         Task<IEnumerable<PrecoModel>> GetPrecoTodos();
         Task<PrecoModel?> GetPrecoPorId(int id);
 
