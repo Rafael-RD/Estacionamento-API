@@ -18,11 +18,15 @@ namespace Estacionamento_API.Controllers
         [HttpGet]
         public async Task<ActionResult<PrecoModel?>> GetPrecoAtual()
         {
-            var preco = await _precoService.GetPrecoAtual();
-
-            if (preco == null) return NotFound("Preço atual não definido");
-
-            return Ok(preco);
+            try
+            {
+                var preco = await _precoService.GetPrecoAtual();
+                return Ok(preco);
+            }
+            catch (Exception ex) { 
+                if (ex.Message == "Nenhum preço para a data atual") return NotFound("Preço atual não definido");
+                else return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("Todos")]
