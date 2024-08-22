@@ -91,6 +91,7 @@ namespace Estacionamento_API.Services
             {
                 Placa = veiculo.Placa,
                 DataEntrada = veiculo.DataEntrada,
+                DataSaida = veiculoSaidaDTO.DataSaida,
                 PrecoFixo = preco.PrecoFixo,
                 PrecoHora = preco.PrecoHora,
                 APagar = aPagarTotal
