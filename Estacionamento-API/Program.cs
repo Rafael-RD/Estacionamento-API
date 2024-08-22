@@ -1,6 +1,7 @@
 using Estacionamento_API.Data;
 using Estacionamento_API.Services;
 using Estacionamento_API.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,11 @@ builder.Services.AddCors(options =>
         policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
 var app = builder.Build();
+
+using (var scope =
+  app.Services.CreateScope())
+using (var context = scope.ServiceProvider.GetService<DataContext>())
+    context.Database.Migrate();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
