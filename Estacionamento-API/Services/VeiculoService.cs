@@ -72,6 +72,7 @@ namespace Estacionamento_API.Services
 
             if (veiculo == null) throw new Exception("Veiculo não encontrado");
 
+            if (veiculo.DataEntrada > veiculoSaidaDTO.DataSaida) throw new Exception("Saida antes da entrada");
 
             var preco = await _precoService.GetPrecoAtual();
 
@@ -107,6 +108,8 @@ namespace Estacionamento_API.Services
         public async Task PutVeiculo(int id, VeiculoModel veiculo)
         {
             if (veiculo.Id != id) throw new Exception("Id requisitado diferente do veiculo id");
+
+            if (veiculo.DataEntrada > veiculo.DataSaida) throw new Exception("Saida antes da entrada");
 
             var veiculoAntigo = await _dataContext.Veiculos.FirstOrDefaultAsync(v => v.Id == id) ?? throw new Exception("Veiculo id não encontrado");
 
